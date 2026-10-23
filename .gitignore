@@ -1,3 +1,28 @@
+# Dependencies and build output
 node_modules/
 dist/
+*.tsbuildinfo
+
+# Local environment and secrets
 .env
+.env.*
+!.env.example
+
+# Test output, caches and logs
+coverage/
+.nyc_output/
+.cache/
+*.log
+
+# Generated project analysis
+/graphify-out/
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Local requirements document
+requirements.pdf
