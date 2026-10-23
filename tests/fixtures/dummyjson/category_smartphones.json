@@ -1,0 +1,99 @@
+{
+  "products": [
+    {
+      "id": 121,
+      "title": "iPhone 5s",
+      "description": "The iPhone 5s is a classic smartphone known for its compact design and advanced features during its release. While it's an older model, it still provides a reliable user experience.",
+      "category": "smartphones",
+      "price": 199.99,
+      "stock": 25,
+      "tags": [
+        "smartphones",
+        "apple"
+      ],
+      "brand": "Apple",
+      "sku": "SMA-APP-IPH-121",
+      "weight": 2,
+      "dimensions": {
+        "width": 5.29,
+        "height": 18.38,
+        "depth": 17.72
+      },
+      "warrantyInformation": "Lifetime warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "In Stock",
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 3,
+      "meta": {
+        "createdAt": "2025-06-05T08:26:32.404Z",
+        "updatedAt": "2025-11-08T01:09:18.076Z",
+        "barcode": "8814683940853",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/1.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/2.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/3.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Fixture only",
+          "date": "2026-01-01T00:00:00.000Z",
+          "reviewerName": "Fixture Reviewer",
+          "reviewerEmail": "fixture@example.invalid"
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "title": "iPhone 6",
+      "description": "The iPhone 6 is a stylish and capable smartphone with a larger display and improved performance. It introduced new features and design elements, making it a popular choice in its time.",
+      "category": "smartphones",
+      "price": 299.99,
+      "stock": 60,
+      "tags": [
+        "smartphones",
+        "apple"
+      ],
+      "brand": "Apple",
+      "sku": "SMA-APP-IPH-122",
+      "weight": 7,
+      "dimensions": {
+        "width": 11,
+        "height": 9.1,
+        "depth": 9.67
+      },
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 5,
+      "meta": {
+        "createdAt": "2025-10-20T01:31:06.524Z",
+        "updatedAt": "2025-11-18T21:22:02.891Z",
+        "barcode": "9922357685013",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/1.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/2.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/3.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Fixture only",
+          "date": "2026-01-01T00:00:00.000Z",
+          "reviewerName": "Fixture Reviewer",
+          "reviewerEmail": "fixture@example.invalid"
+        }
+      ]
+    }
+  ],
+  "total": 16,
+  "skip": 0,
+  "limit": 16
+}

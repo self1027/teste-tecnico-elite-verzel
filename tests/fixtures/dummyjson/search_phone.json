@@ -1,0 +1,96 @@
+{
+  "products": [
+    {
+      "id": 101,
+      "title": "Apple AirPods Max Silver",
+      "description": "The Apple AirPods Max in Silver are premium over-ear headphones with high-fidelity audio, adaptive EQ, and active noise cancellation. Experience immersive sound in style.",
+      "category": "mobile-accessories",
+      "price": 549.99,
+      "stock": 59,
+      "tags": [
+        "electronics",
+        "over-ear headphones"
+      ],
+      "brand": "Apple",
+      "sku": "MOB-APP-APP-101",
+      "weight": 2,
+      "dimensions": {
+        "width": 24.88,
+        "height": 14.9,
+        "depth": 27.54
+      },
+      "warrantyInformation": "No warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 1,
+      "meta": {
+        "createdAt": "2025-04-30T05:48:38.966Z",
+        "updatedAt": "2026-02-26T10:53:58.445Z",
+        "barcode": "4062176053732",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/1.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/thumbnail.webp",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Fixture only",
+          "date": "2026-01-01T00:00:00.000Z",
+          "reviewerName": "Fixture Reviewer",
+          "reviewerEmail": "fixture@example.invalid"
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "title": "Apple iPhone Charger",
+      "description": "The Apple iPhone Charger is a high-quality charger designed for fast and efficient charging of your iPhone. Ensure your device stays powered up and ready to go.",
+      "category": "mobile-accessories",
+      "price": 19.99,
+      "stock": 31,
+      "tags": [
+        "electronics",
+        "chargers"
+      ],
+      "brand": "Apple",
+      "sku": "MOB-APP-APP-104",
+      "weight": 1,
+      "dimensions": {
+        "width": 13.63,
+        "height": 26.25,
+        "depth": 5.95
+      },
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 14,
+      "meta": {
+        "createdAt": "2025-08-18T18:08:42.395Z",
+        "updatedAt": "2026-07-16T18:55:42.348Z",
+        "barcode": "0879776541417",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/1.webp",
+        "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/2.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/thumbnail.webp",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Fixture only",
+          "date": "2026-01-01T00:00:00.000Z",
+          "reviewerName": "Fixture Reviewer",
+          "reviewerEmail": "fixture@example.invalid"
+        }
+      ]
+    }
+  ],
+  "total": 23,
+  "skip": 0,
+  "limit": 23
+}
