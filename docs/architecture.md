@@ -5,13 +5,14 @@
 A base de persistencia contem schemas, tipos inferidos e migracao das 12 tabelas.
 A autenticacao e o seed estao descritos em [authentication.md](authentication.md).
 A integracao DummyJSON e os snapshots locais estao descritos em [catalog.md](catalog.md).
+Criacao e lifecycle dos leiloes estao descritos em [auctions.md](auctions.md).
 Esses modulos nao alteram schemas nem implementam operacoes financeiras.
 
 | Modulo | Tabelas sob sua responsabilidade |
 | --- | --- |
 | users | users |
 | catalog | product_snapshots; provider externo, consultas e importacao imutavel |
-| auctions | auctions, bids, auction_settlements |
+| auctions | auctions, bids, auction_settlements; criacao, lifecycle e administracao dos lotes |
 | wallets | wallets, wallet_reservations |
 | ledger | ledger_accounts, ledger_transactions, ledger_entries |
 | audit | audit_events, audit_anchors |
