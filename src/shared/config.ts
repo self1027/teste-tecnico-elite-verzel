@@ -35,3 +35,7 @@ export type AuthConfig = ReturnType<typeof readAuthConfig>;
 export function readPort(env: Record<string, string | undefined>): number {
   return z.coerce.number().int().min(1).max(65535).default(3000).parse(env.PORT);
 }
+
+export function readCatalogTimeout(env: Record<string, string | undefined>): number {
+  return z.coerce.number().int().min(1).max(30000).default(5000).parse(env.DUMMYJSON_TIMEOUT_MS);
+}
