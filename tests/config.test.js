@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readAuthConfig, readDatabaseURL, readPort, readSeedConfig } from '../src/shared/config.ts';
+import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSeedConfig } from '../src/shared/config.ts';
 
 test('authentication configuration requires a secret and a valid expiration', () => {
   for (const value of [undefined, '', 'short']) {
@@ -27,4 +27,12 @@ test('database URL and HTTP port reject invalid configuration', () => {
   assert.equal(readDatabaseURL({ DATABASE_URL: 'postgresql://localhost/test' }), 'postgresql://localhost/test');
   assert.equal(readPort({}), 3000);
   assert.throws(() => readPort({ PORT: '70000' }));
+});
+
+test('catalog timeout configuration is bounded and defaults to five seconds', () => {
+  assert.equal(readCatalogTimeout({}), 5000);
+  assert.equal(readCatalogTimeout({ DUMMYJSON_TIMEOUT_MS: '1000' }), 1000);
+  for (const value of ['0', '-1', '30001', 'abc', '1.5', '']) {
+    assert.throws(() => readCatalogTimeout({ DUMMYJSON_TIMEOUT_MS: value }));
+  }
 });
