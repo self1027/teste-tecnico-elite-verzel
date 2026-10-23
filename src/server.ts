@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { createApp } from './app.js';
 import { createAuthModule } from './modules/auth/index.js';
+import { createAuctionModule } from './modules/auctions/index.js';
 import { createCatalogModule } from './modules/catalog/index.js';
 import { DummyJsonProvider } from './modules/catalog/infrastructure/dummyjson-provider.js';
 import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort } from './shared/config.js';
@@ -15,7 +16,8 @@ async function main(): Promise<void> {
     await pool.query('SELECT 1');
     const auth = await createAuthModule(db, config);
     const catalog = createCatalogModule(db, auth.authenticate, new DummyJsonProvider({ timeoutMs: catalogTimeout }));
-    const server = createApp(auth.router, catalog).listen(port, () => {
+    const auctionRouter = createAuctionModule(db, auth.authenticate);
+    const server = createApp(auth.router, catalog, auctionRouter).listen(port, () => {
       console.log(`Server is running on port ${String(port)}`);
     });
     server.on('error', () => {
