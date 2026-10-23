@@ -2,8 +2,9 @@
 
 ## Escopo inicial
 
-Esta etapa implementa somente os contratos de persistencia (schemas e tipos inferidos)
-e a migracao das 12 tabelas fornecidas. Nao cria classes nem antecipa operacoes de negocio.
+A base de persistencia contem schemas, tipos inferidos e migracao das 12 tabelas.
+A etapa seguinte implementa seed, autenticacao e autorizacao conforme
+[authentication.md](authentication.md), sem alterar schemas ou implementar operacoes financeiras.
 
 | Modulo | Tabelas sob sua responsabilidade |
 | --- | --- |
@@ -13,6 +14,7 @@ e a migracao das 12 tabelas fornecidas. Nao cria classes nem antecipa operacoes 
 | wallets | wallets, wallet_reservations |
 | ledger | ledger_accounts, ledger_transactions, ledger_entries |
 | audit | audit_events, audit_anchors |
+| auth | sem tabelas proprias; login, JWT e middlewares de seguranca |
 
 ## Contrato entre camadas, antes das classes
 
@@ -41,7 +43,11 @@ src/modules/<dominio>/
     schema.ts     # schema Drizzle e tipos de persistencia
 ```
 
-As pastas sem implementacao ainda nao existem. Os tipos `$inferSelect`/`$inferInsert`
+As pastas sem implementacao ainda nao existem. O modulo users publica UserReader
+e DTOs independentes do ORM; AuthService recebe esses contratos por construtor.
+Controllers nao consultam banco. O seed e infraestrutura de composicao do banco,
+e coordena somente a criacao inicial entre schemas numa unica transacao.
+Os tipos `$inferSelect`/`$inferInsert`
 exportados pelos schemas sao contratos de persistencia, nao contratos de negocio.
 As referencias entre schemas sao dependencias da infraestrutura exigidas pelas FKs;
 nao autorizam acesso entre modulos na camada de aplicacao. `shared/database/schema.ts`
