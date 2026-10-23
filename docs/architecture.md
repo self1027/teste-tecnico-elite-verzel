@@ -3,13 +3,14 @@
 ## Escopo inicial
 
 A base de persistencia contem schemas, tipos inferidos e migracao das 12 tabelas.
-A etapa seguinte implementa seed, autenticacao e autorizacao conforme
-[authentication.md](authentication.md), sem alterar schemas ou implementar operacoes financeiras.
+A autenticacao e o seed estao descritos em [authentication.md](authentication.md).
+A integracao DummyJSON e os snapshots locais estao descritos em [catalog.md](catalog.md).
+Esses modulos nao alteram schemas nem implementam operacoes financeiras.
 
 | Modulo | Tabelas sob sua responsabilidade |
 | --- | --- |
 | users | users |
-| catalog | product_snapshots |
+| catalog | product_snapshots; provider externo, consultas e importacao imutavel |
 | auctions | auctions, bids, auction_settlements |
 | wallets | wallets, wallet_reservations |
 | ledger | ledger_accounts, ledger_transactions, ledger_entries |
