@@ -1,4 +1,4 @@
-import { bigint, json, pgTable, text, timestamp, uniqueIndex, uuid, varchar } from 'drizzle-orm/pg-core';
+import { bigint, integer, json, pgTable, text, timestamp, uniqueIndex, uuid, varchar } from 'drizzle-orm/pg-core';
 import { auctions } from '../../auctions/infrastructure/schema.js';
 
 export const auditEvents = pgTable('audit_events', {
@@ -9,6 +9,7 @@ export const auditEvents = pgTable('audit_events', {
   payload: json('payload').notNull(),
   previousHash: varchar('previous_hash', { length: 64 }).notNull(),
   eventHash: varchar('event_hash', { length: 64 }).notNull(),
+  hashVersion: integer('hash_version').notNull(),
   createdAt: timestamp('created_at').notNull(),
 }, (table) => [
   uniqueIndex('audit_events_auction_id_sequence_unique').on(table.auctionId, table.sequence),

@@ -56,7 +56,7 @@ test('migration and domain relationships work on an isolated PostgreSQL database
       assert.equal(bid.amountCents, preciseAmount);
       assert.equal(bid.sequence, 1n);
       await db.insert(schema.auctionSettlements).values({ id: randomUUID(), auctionId, winningBidId: bidId, ledgerTransactionId: transactionId, amountCents: preciseAmount, receiptToken: randomUUID(), settledAt: now });
-      await db.insert(schema.auditEvents).values({ id: randomUUID(), auctionId, sequence: 1n, eventType: 'BID_PLACED', payload: { bidId }, previousHash: '0'.repeat(64), eventHash: '1'.repeat(64), createdAt: now });
+      await db.insert(schema.auditEvents).values({ id: randomUUID(), auctionId, sequence: 1n, eventType: 'BID_PLACED', payload: { bidId }, previousHash: '0'.repeat(64), eventHash: '1'.repeat(64), hashVersion: 0, createdAt: now });
       await db.insert(schema.auditAnchors).values({ id: randomUUID(), auctionId, lastSequence: 1n, lastHash: '1'.repeat(64), anchoredAt: now });
 
       async function rejectsSQL(sql, code) {
