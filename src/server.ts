@@ -3,6 +3,7 @@ import { createApp } from './app.js';
 import { createAuthModule } from './modules/auth/index.js';
 import { createAuctionModule } from './modules/auctions/index.js';
 import { createCatalogModule } from './modules/catalog/index.js';
+import { createWalletModule } from './modules/wallets/index.js';
 import { DummyJsonProvider } from './modules/catalog/infrastructure/dummyjson-provider.js';
 import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort } from './shared/config.js';
 import { createDatabase } from './shared/database/client.js';
@@ -17,7 +18,8 @@ async function main(): Promise<void> {
     const auth = await createAuthModule(db, config);
     const catalog = createCatalogModule(db, auth.authenticate, new DummyJsonProvider({ timeoutMs: catalogTimeout }));
     const auctionRouter = createAuctionModule(db, auth.authenticate);
-    const server = createApp(auth.router, catalog, auctionRouter).listen(port, () => {
+    const walletRouter = createWalletModule(db, auth.authenticate);
+    const server = createApp(auth.router, catalog, auctionRouter, walletRouter).listen(port, () => {
       console.log(`Server is running on port ${String(port)}`);
     });
     server.on('error', () => {

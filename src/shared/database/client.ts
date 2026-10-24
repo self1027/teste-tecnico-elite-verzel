@@ -2,6 +2,7 @@ import pg from 'pg';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 export type Database = NodePgDatabase;
+export type DatabaseTransaction = Parameters<Parameters<Database['transaction']>[0]>[0];
 
 export function createDatabase(connectionString: string) {
   const pool = new pg.Pool({ connectionString });
