@@ -10,6 +10,7 @@
     "db:migrate": "drizzle-kit migrate",
     "test:db": "node --import tsx --test tests/integration/*.test.js",
     "dev": "tsx watch src/server.ts",
+    "audit:witness": "tsx src/modules/audit/witness/main.ts",
     "typecheck": "tsc --noEmit",
     "db:seed": "tsx src/shared/database/run-seed.ts"
   },
