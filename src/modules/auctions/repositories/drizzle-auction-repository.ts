@@ -1,5 +1,6 @@
 import { and, asc, count, desc, eq, gt, lte, sql } from 'drizzle-orm';
-import type { Database } from '../../../shared/database/client.js';
+import type { Database, DatabaseTransaction } from '../../../shared/database/client.js';
+import type { AuditAppender } from '../../audit/contracts/audit.js';
 import { productSnapshots } from '../../catalog/infrastructure/schema.js';
 import { auctions, bids } from '../infrastructure/schema.js';
 import type { AuctionPage, AuctionQuery, AuctionRepository, AuctionWithSnapshot, AuctionWriteContext } from '../contracts/auctions.js';
@@ -31,7 +32,7 @@ function filters(input: AuctionQuery, now: Date) {
 }
 
 export class DrizzleAuctionRepository implements AuctionRepository {
-  constructor(private readonly db: Database) {}
+  constructor(private readonly db: Database, private readonly audit?: (tx: DatabaseTransaction) => AuditAppender) {}
 
   transaction<T>(work: (tx: AuctionWriteContext) => Promise<T>): Promise<T> {
     return this.db.transaction(async (tx) => {
@@ -39,6 +40,15 @@ export class DrizzleAuctionRepository implements AuctionRepository {
         const result = await findJoined(tx, id);
         if (!result) throw new Error('Auction write returned no record');
         return result;
+      }
+      const audit = this.audit?.(tx);
+      async function record(auction: AuctionWithSnapshot, eventType: 'AUCTION_CREATED' | 'AUCTION_UPDATED' | 'AUCTION_CANCELLED'): Promise<void> {
+        if (!audit) return;
+        await audit.append({ auctionId: auction.id, eventType, createdAt: auction.updatedAt.toISOString(), payload: {
+          productSnapshotId: auction.productSnapshotId, startingBidCents: auction.startingBidCents.toString(),
+          minIncrementCents: auction.minIncrementCents.toString(), startsAt: auction.startsAt.toISOString(), endsAt: auction.endsAt.toISOString(),
+          status: auction.status, currentBidId: auction.currentBidId,
+        } });
       }
       return work({
         async lock(id) {
@@ -57,11 +67,15 @@ export class DrizzleAuctionRepository implements AuctionRepository {
         },
         async insert(auction) {
           await tx.insert(auctions).values(auction);
-          return requiredJoined(auction.id);
+          const result = await requiredJoined(auction.id);
+          await record(result, 'AUCTION_CREATED');
+          return result;
         },
         async update(id, changes) {
           await tx.update(auctions).set(changes).where(eq(auctions.id, id));
-          return requiredJoined(id);
+          const result = await requiredJoined(id);
+          await record(result, changes.status === 'CANCELLED' ? 'AUCTION_CANCELLED' : 'AUCTION_UPDATED');
+          return result;
         },
       });
     }, { isolationLevel: 'read committed' });

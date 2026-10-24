@@ -5,9 +5,10 @@ import { authorize } from '../auth/middleware/authorization.js';
 import { AuctionController } from './controllers/auction-controller.js';
 import { DrizzleAuctionRepository } from './repositories/drizzle-auction-repository.js';
 import { AuctionService } from './services/auction-service.js';
+import { DrizzleAuditAppender } from '../audit/repositories/drizzle-audit-appender.js';
 
 export function createAuctionModule(database: Database, authenticate: ReturnType<typeof authentication>): Router {
-  const controller = new AuctionController(new AuctionService(new DrizzleAuctionRepository(database)));
+  const controller = new AuctionController(new AuctionService(new DrizzleAuctionRepository(database, (tx) => new DrizzleAuditAppender(tx))));
   const router = Router();
   const auctioneer = authorize('AUCTIONEER');
   router.get('/', controller.list);
